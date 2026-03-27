@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hemanth Chakravarthy Mudduluru</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Dancing+Script:wght@700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink:    #0d1117;
+      --cream:  #f7f2eb;
+      --warm:   #ede5d8;
+      --gold:   #c9943a;
+      --rust:   #b04e2a;
+      --mist:   #8a9ba8;
+      --text:   #2a2a2a;
+      --light:  #ffffff;
+      --nav-h:  64px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 999; opacity: .4;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      height: var(--nav-h);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 clamp(1.5rem, 5vw, 4rem);
+      background: rgba(247,242,235,.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(201,148,58,.18);
+      z-index: 100;
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem; font-weight: 600; letter-spacing: .03em;
+      color: var(--ink); text-decoration: none;
+    }
+    .nav-logo span { color: var(--gold); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: .8rem; font-weight: 500; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--text); text-decoration: none;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      padding-top: var(--nav-h);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 0;
+    }
+    .hero-text {
+      padding: clamp(3rem, 8vw, 7rem) clamp(2rem, 6vw, 5rem) clamp(3rem, 8vw, 7rem) clamp(2rem, 8vw, 6rem);
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: .7rem;
+      font-size: .75rem; font-weight: 500; letter-spacing: .18em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem;
+    }
+    .hero-eyebrow::before {
+      content: ''; width: 32px; height: 1px; background: var(--gold);
+    }
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.8rem, 6vw, 5.2rem);
+      font-weight: 300; line-height: 1.1; color: var(--ink);
+    }
+    h1 em { font-style: italic; color: var(--rust); }
+    .hero-tagline {
+      margin-top: 1.5rem;
+      font-size: 1.05rem; font-weight: 300; line-height: 1.7;
+      color: #555; max-width: 420px;
+    }
+    .hero-meta {
+      margin-top: 2rem;
+      display: flex; flex-wrap: wrap; gap: .6rem;
+    }
+    .pill {
+      display: inline-flex; align-items: center; gap: .4rem;
+      padding: .35rem .9rem; border-radius: 100px;
+      background: var(--warm); font-size: .75rem; font-weight: 400;
+      color: #444; border: 1px solid rgba(0,0,0,.06);
+    }
+    .pill .icon { font-size: .85rem; }
+    .hero-cta {
+      margin-top: 2.8rem; display: flex; gap: 1rem; flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .75rem 1.8rem; border-radius: 4px; font-size: .85rem;
+      font-weight: 500; text-decoration: none; transition: all .25s;
+      letter-spacing: .04em;
+    }
+    .btn-primary {
+      background: var(--ink); color: var(--light);
+    }
+    .btn-primary:hover { background: var(--rust); transform: translateY(-2px); }
+    .btn-outline {
+      border: 1.5px solid var(--ink); color: var(--ink);
+    }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+
+    .hero-image {
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .hero-image img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: top center;
+      display: block;
+    }
+    .hero-image-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to right, var(--cream) 0%, transparent 15%, transparent 85%, var(--cream) 100%),
+                  linear-gradient(to bottom, var(--cream) 0%, transparent 8%, transparent 92%, var(--cream) 100%);
+    }
+    .hero-caption {
+      position: absolute; bottom: 2rem; right: 2rem;
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.6rem; color: var(--light);
+      text-shadow: 0 2px 12px rgba(0,0,0,.5);
+      opacity: .9;
+    }
+
+    /* ── SECTION BASE ── */
+    section {
+      padding: clamp(4rem, 10vw, 8rem) clamp(2rem, 8vw, 6rem);
+    }
+    .section-label {
+      font-size: .72rem; font-weight: 500; letter-spacing: .2em;
+      text-transform: uppercase; color: var(--gold);
+      display: flex; align-items: center; gap: .6rem; margin-bottom: 1.2rem;
+    }
+    .section-label::before {
+      content: ''; display: block; width: 28px; height: 1px; background: var(--gold);
+    }
+    h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      font-weight: 300; line-height: 1.15; color: var(--ink);
+    }
+    h2 em { font-style: italic; color: var(--rust); }
+
+    /* ── ABOUT ── */
+    #about {
+      background: var(--ink);
+      color: var(--cream);
+    }
+    #about .section-label { color: var(--gold); }
+    #about h2 { color: var(--cream); }
+    #about h2 em { color: #e8a84c; }
+    .about-grid {
+      display: grid; grid-template-columns: 1.4fr 1fr;
+      gap: 5rem; align-items: start; margin-top: 3rem;
+    }
+    .about-bio p {
+      font-size: 1.1rem; font-weight: 300; line-height: 1.85; color: rgba(247,242,235,.85);
+      margin-bottom: 1.4rem;
+    }
+    .about-bio p strong { color: var(--gold); font-weight: 500; }
+    .about-stats {
+      display: flex; flex-direction: column; gap: 1.8rem;
+    }
+    .stat-card {
+      padding: 1.6rem 2rem;
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 8px;
+      background: rgba(255,255,255,.04);
+      transition: border-color .3s, background .3s;
+    }
+    .stat-card:hover {
+      border-color: rgba(201,148,58,.35);
+      background: rgba(201,148,58,.06);
+    }
+    .stat-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem; font-weight: 300; color: var(--gold);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: .82rem; font-weight: 400; color: rgba(247,242,235,.5);
+      margin-top: .4rem; letter-spacing: .05em;
+    }
+
+    /* ── JOURNEY / TIMELINE ── */
+    #journey { background: var(--warm); }
+    .timeline {
+      margin-top: 3.5rem;
+      position: relative;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute; left: 11px; top: 6px; bottom: 0;
+      width: 1px; background: linear-gradient(to bottom, var(--gold), transparent);
+    }
+    .timeline-item {
+      display: grid; grid-template-columns: auto 1fr;
+      gap: 1.5rem; margin-bottom: 2.8rem;
+      opacity: 0; transform: translateX(-20px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .timeline-item.visible { opacity: 1; transform: none; }
+    .timeline-dot {
+      width: 23px; height: 23px; border-radius: 50%;
+      background: var(--cream); border: 2.5px solid var(--gold);
+      flex-shrink: 0; position: relative; z-index: 1;
+      margin-top: .25rem;
+    }
+    .timeline-dot.active { background: var(--gold); }
+    .timeline-content {}
+    .timeline-place {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem; font-weight: 600; color: var(--ink);
+    }
+    .timeline-role {
+      font-size: .82rem; font-weight: 500; letter-spacing: .06em;
+      color: var(--rust); margin-top: .15rem; text-transform: uppercase;
+    }
+    .timeline-desc {
+      font-size: .9rem; font-weight: 300; line-height: 1.7;
+      color: #555; margin-top: .5rem;
+    }
+
+    /* ── VALUES ── */
+    #values { background: var(--cream); }
+    .values-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem; margin-top: 3rem;
+    }
+    .value-card {
+      padding: 2rem 1.8rem;
+      border-radius: 8px;
+      border: 1.5px solid rgba(0,0,0,.07);
+      background: var(--light);
+      transition: transform .3s, box-shadow .3s, border-color .3s;
+      cursor: default;
+    }
+    .value-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 40px rgba(0,0,0,.09);
+      border-color: var(--gold);
+    }
+    .value-icon { font-size: 2rem; margin-bottom: 1rem; }
+    .value-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem; font-weight: 600; color: var(--ink); margin-bottom: .5rem;
+    }
+    .value-text { font-size: .85rem; line-height: 1.65; color: #666; font-weight: 300; }
+
+    /* ── INTERESTS ── */
+    #interests { background: var(--warm); }
+    .interests-list {
+      margin-top: 2.5rem;
+      display: flex; flex-wrap: wrap; gap: .8rem;
+    }
+    .interest-tag {
+      display: inline-flex; align-items: center; gap: .45rem;
+      padding: .55rem 1.2rem; border-radius: 100px;
+      border: 1.5px solid var(--ink);
+      font-size: .85rem; font-weight: 400; color: var(--ink);
+      transition: all .25s; cursor: default;
+    }
+    .interest-tag:hover {
+      background: var(--ink); color: var(--cream);
+      transform: scale(1.04);
+    }
+    .interest-tag .tag-icon { font-size: 1rem; }
+
+    /* ── FUNFACT BANNER ── */
+    .funfact {
+      background: var(--gold);
+      padding: 3rem clamp(2rem, 8vw, 6rem);
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 2rem;
+    }
+    .funfact-left {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 5vw, 4rem);
+      font-weight: 300; color: var(--ink); line-height: 1.1;
+    }
+    .funfact-left span { display: block; font-size: .8em; font-style: italic; }
+    .funfact-right {
+      font-size: .95rem; font-weight: 400; color: rgba(13,17,23,.75);
+      max-width: 380px; line-height: 1.7;
+    }
+
+    /* ── CONNECT / FOOTER ── */
+    #connect {
+      background: var(--ink);
+      text-align: center;
+      padding: clamp(5rem, 12vw, 10rem) clamp(2rem, 8vw, 6rem);
+    }
+    #connect .section-label { justify-content: center; }
+    #connect h2 { color: var(--cream); margin-top: 1rem; }
+    #connect p {
+      margin-top: 1.2rem; color: rgba(247,242,235,.55);
+      font-size: 1rem; font-weight: 300;
+    }
+    .connect-actions { margin-top: 2.8rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-gold {
+      background: var(--gold); color: var(--ink); font-weight: 600;
+    }
+    .btn-gold:hover { background: #d4a03e; transform: translateY(-2px); }
+
+    footer {
+      background: #080c10;
+      padding: 1.5rem clamp(2rem, 8vw, 6rem);
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;
+      gap: 1rem;
+    }
+    footer p { font-size: .78rem; color: rgba(255,255,255,.25); }
+    footer a { color: rgba(255,255,255,.35); text-decoration: none; transition: color .2s; }
+    footer a:hover { color: var(--gold); }
+
+    /* ── SCROLL ANIMATIONS ── */
+    .fade-up {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 860px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-image { height: 60vw; }
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .nav-links { display: none; }
+    }
+    @media (max-width: 500px) {
+      .hero-image { height: 80vw; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">H<span>.</span>C Mudduluru</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#journey">Journey</a></li>
+    <li><a href="#values">Values</a></li>
+    <li><a href="#interests">Interests</a></li>
+    <li><a href="#connect">Connect</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="padding-bottom:0; padding-top: var(--nav-h);">
+  <div class="hero-text">
+    <div class="hero-eyebrow">Engineer · Traveller · AI Enthusiast</div>
+    <h1>Hemanth<br><em>Chakravarthy</em><br>Mudduluru</h1>
+    <p class="hero-tagline">Passionate about Technology, Travel &amp; AI — building things that matter, across three continents.</p>
+    <div class="hero-meta">
+      <span class="pill"><span class="icon">📍</span> New York, USA</span>
+      <span class="pill"><span class="icon">🇮🇳</span> Tirupati Roots</span>
+      <span class="pill"><span class="icon">🧠</span> 10+ Years in Tech</span>
+      <span class="pill"><span class="icon">✍️</span> 3400+ LinkedIn Followers</span>
+    </div>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="https://www.linkedin.com/in/hemanth-chakravarthy-mudduluru-26081993/" target="_blank" rel="noopener">
+        ↗ LinkedIn
+      </a>
+      <a class="btn btn-outline" href="#about">Discover More</a>
+    </div>
+  </div>
+
+  <div class="hero-image">
+    <!-- 
+      ▶ Place your collage image as "collage.jpg" in the same folder as this index.html
+         e.g. your GitHub Pages repo root.
+    -->
+    <img src="collage.jpg" alt="Hemanth's special moments collage" loading="eager" />
+    <div class="hero-image-overlay"></div>
+    <div class="hero-caption">Special moments</div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">Who I Am</div>
+  <h2>A life shaped by <em>curiosity</em><br>and three continents</h2>
+
+  <div class="about-grid">
+    <div class="about-bio fade-up">
+      <p>
+        Born and raised in <strong>Tirupati, India</strong>, I grew up in a city of temples, grit, and ambition. 
+        My academic journey took me through <strong>Hyderabad</strong> for high school and <strong>Bengaluru</strong> 
+        for my Bachelor's degree — soaking in India's tech heartbeat.
+      </p>
+      <p>
+        A hunger for deeper expertise led me to <strong>Düsseldorf, Germany</strong> for my Master's, 
+        where I spent over 6 years building expertise in software engineering while navigating life in Europe. 
+        The discipline of German engineering and the warmth of multicultural Düsseldorf shaped who I am professionally.
+      </p>
+      <p>
+        Today I call the <strong>United States</strong> home, continuing to push boundaries in technology and AI. 
+        I'm <strong>married to Sowmya</strong>, and together we are proud parents of two — 
+        <strong>Paarth &amp; Yashna</strong>, who remind me every day what truly matters.
+      </p>
+    </div>
+
+    <div class="about-stats fade-up" style="transition-delay:.15s">
+      <div class="stat-card">
+        <div class="stat-number">~13<span style="font-size:1.6rem">yrs</span></div>
+        <div class="stat-label">Professional Experience</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">3</div>
+        <div class="stat-label">Continents Lived &amp; Worked</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">3.4K<span style="font-size:1.6rem">+</span></div>
+        <div class="stat-label">LinkedIn Followers</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">∞</div>
+        <div class="stat-label">Curiosity Remaining</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JOURNEY -->
+<section id="journey">
+  <div class="section-label">My Path</div>
+  <h2>A journey across <em>cities,</em><br>cultures &amp; careers</h2>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <div class="timeline-place">Tirupati, India 🇮🇳</div>
+        <div class="timeline-role">Childhood &amp; Foundations</div>
+        <div class="timeline-desc">Where it all began — in the shadow of the sacred Tirumala hills. A city that taught resilience, faith, and the value of roots.</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <div class="timeline-place">Hyderabad, India 🏙️</div>
+        <div class="timeline-role">High School</div>
+        <div class="timeline-desc">Embracing the City of Pearls, where ambition meets culture. Found my passion for technology and engineering here.</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <div class="timeline-place">Bengaluru, India 🌿</div>
+        <div class="timeline-role">Bachelor's Degree + ~3 Years Work</div>
+        <div class="timeline-desc">India's Silicon Valley. Earned my Bachelor's and built my early career, absorbing the energy of one of the world's fastest-growing tech ecosystems.</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <div class="timeline-place">Düsseldorf, Germany 🇩🇪</div>
+        <div class="timeline-role">Master's Degree + ~6.5 Years Work</div>
+        <div class="timeline-desc">Precision, depth, and European perspectives. Built mastery in software engineering and experienced life across a beautifully organised continent.</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot active"></div>
+      <div class="timeline-content">
+        <div class="timeline-place">United States 🇺🇸</div>
+        <div class="timeline-role">~3.5 Years &amp; Counting</div>
+        <div class="timeline-desc">The land of scale and speed. Pushing frontiers in Tech and AI, while raising a family and writing the most exciting chapter yet.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section id="values">
+  <div class="section-label">Core Values</div>
+  <h2>What I hold <em>close</em></h2>
+
+  <div class="values-grid">
+    <div class="value-card fade-up">
+      <div class="value-icon">👨‍👩‍👧‍👦</div>
+      <div class="value-title">Family First</div>
+      <div class="value-text">Sowmya, Paarth and Yashna are my anchor. Every ambition, every milestone, every adventure — is ultimately for them.</div>
+    </div>
+    <div class="value-card fade-up" style="transition-delay:.1s">
+      <div class="value-icon">💪</div>
+      <div class="value-title">Health &amp; Fitness</div>
+      <div class="value-text">Long walks, hikes and physical well-being are a non-negotiable. A healthy body fuels a sharp mind and a full life.</div>
+    </div>
+    <div class="value-card fade-up" style="transition-delay:.2s">
+      <div class="value-icon">📚</div>
+      <div class="value-title">Lifelong Learning</div>
+      <div class="value-text">From Bengaluru to Düsseldorf to New York — the one constant has been a relentless drive to learn, grow, and stay curious.</div>
+    </div>
+    <div class="value-card fade-up" style="transition-delay:.3s">
+      <div class="value-icon">📈</div>
+      <div class="value-title">Financial Growth</div>
+      <div class="value-text">Building sustainable wealth through informed decisions, smart investing, and the discipline to think long-term.</div>
+    </div>
+  </div>
+</section>
+
+<!-- INTERESTS -->
+<section id="interests">
+  <div class="section-label">Interests &amp; Hobbies</div>
+  <h2>Life outside <em>the screen</em></h2>
+
+  <div class="interests-list">
+    <span class="interest-tag"><span class="tag-icon">✍️</span> Technical Writing</span>
+    <span class="interest-tag"><span class="tag-icon">✈️</span> Travelling</span>
+    <span class="interest-tag"><span class="tag-icon">🥾</span> Hiking</span>
+    <span class="interest-tag"><span class="tag-icon">🚶</span> Long Walks</span>
+    <span class="interest-tag"><span class="tag-icon">🎬</span> Watching Movies</span>
+    <span class="interest-tag"><span class="tag-icon">🤖</span> AI Applications</span>
+    <span class="interest-tag"><span class="tag-icon">🧠</span> Exploring LLMs</span>
+    <span class="interest-tag"><span class="tag-icon">📖</span> Reading</span>
+    <span class="interest-tag"><span class="tag-icon">🌍</span> Cultural Immersion</span>
+    <span class="interest-tag"><span class="tag-icon">💡</span> Building Side Projects</span>
+  </div>
+</section>
+
+<!-- FUN FACT BANNER -->
+<div class="funfact">
+  <div class="funfact-left">
+    3,400+
+    <span>LinkedIn Followers &amp; Growing</span>
+  </div>
+  <div class="funfact-right">
+    I share technical articles, insights on AI, and career experiences that resonate with engineers and tech professionals across the globe. The conversations and community built through writing have been one of the most rewarding parts of my career.
+  </div>
+</div>
+
+<!-- CONNECT -->
+<section id="connect">
+  <div class="section-label">Get In Touch</div>
+  <h2>Let's <em>connect</em> &amp; create</h2>
+  <p>Whether it's about technology, AI, career experiences, or just a good conversation — I'm always open.</p>
+  <div class="connect-actions">
+    <a class="btn btn-gold" href="https://www.linkedin.com/in/hemanth-chakravarthy-mudduluru-26081993/" target="_blank" rel="noopener">
+      ↗ Connect on LinkedIn
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 Hemanth Chakravarthy Mudduluru · Built with curiosity &amp; caffeine ☕</p>
+  <a href="https://www.linkedin.com/in/hemanth-chakravarthy-mudduluru-26081993/" target="_blank" rel="noopener">LinkedIn ↗</a>
+</footer>
+
+<script>
+  // Intersection observer for fade-up and timeline animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-up, .timeline-item').forEach(el => observer.observe(el));
+
+  // Stagger timeline items
+  document.querySelectorAll('.timeline-item').forEach((el, i) => {
+    el.style.transitionDelay = `${i * 0.12}s`;
+  });
+</script>
+</body>
+</html>
