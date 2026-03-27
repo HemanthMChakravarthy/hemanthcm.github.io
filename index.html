@@ -66,15 +66,16 @@
 
     /* ── HERO ── */
     .hero {
-      min-height: 100vh;
       padding-top: var(--nav-h);
       display: grid;
       grid-template-columns: 1fr 1fr;
-      align-items: center;
+      align-items: start;
       gap: 0;
     }
     .hero-text {
       padding: clamp(3rem, 8vw, 7rem) clamp(2rem, 6vw, 5rem) clamp(3rem, 8vw, 7rem) clamp(2rem, 8vw, 6rem);
+      position: sticky;
+      top: var(--nav-h);
     }
     .hero-eyebrow {
       display: inline-flex; align-items: center; gap: .7rem;
@@ -126,25 +127,27 @@
 
     .hero-image {
       position: relative;
-      height: 100vh;
-      overflow: hidden;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 3rem 2rem 3rem 1rem;
+      background: var(--warm);
     }
     .hero-image img {
-      width: 100%; height: 100%;
-      object-fit: cover; object-position: top center;
+      width: 100%;
+      max-width: 420px;
+      height: auto;
       display: block;
+      border-radius: 16px;
+      box-shadow: 0 24px 60px rgba(0,0,0,.18), 0 4px 16px rgba(0,0,0,.1);
     }
-    .hero-image-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(to right, var(--cream) 0%, transparent 15%, transparent 85%, var(--cream) 100%),
-                  linear-gradient(to bottom, var(--cream) 0%, transparent 8%, transparent 92%, var(--cream) 100%);
-    }
+    .hero-image-overlay { display: none; }
     .hero-caption {
-      position: absolute; bottom: 2rem; right: 2rem;
+      position: absolute; bottom: 3.5rem; left: 50%;
+      transform: translateX(-50%);
       font-family: 'Dancing Script', cursive;
-      font-size: 1.6rem; color: var(--light);
-      text-shadow: 0 2px 12px rgba(0,0,0,.5);
-      opacity: .9;
+      font-size: 1.5rem; color: var(--ink);
+      opacity: .55; white-space: nowrap;
     }
 
     /* ── SECTION BASE ── */
@@ -347,12 +350,14 @@
     /* ── RESPONSIVE ── */
     @media (max-width: 860px) {
       .hero { grid-template-columns: 1fr; }
-      .hero-image { height: 60vw; }
+      .hero-text { position: static; }
+      .hero-image { padding: 2rem; justify-content: center; }
+      .hero-image img { max-width: 340px; }
       .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
       .nav-links { display: none; }
     }
     @media (max-width: 500px) {
-      .hero-image { height: 80vw; }
+      .hero-image img { max-width: 100%; }
     }
   </style>
 </head>
