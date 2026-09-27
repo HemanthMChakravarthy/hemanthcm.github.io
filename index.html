@@ -35,7 +35,7 @@
     body::before {
       content: '';
       position: fixed; inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' result='noise'/%3E%3CfeDisplacementMap in='SourceGraphic' in2='noise' scale='120'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
       pointer-events: none; z-index: 999; opacity: .4;
     }
 
@@ -384,7 +384,7 @@
     <div class="hero-meta">
       <span class="pill"><span class="icon">📍</span> Walled Lake, MI, USA</span>
       <span class="pill"><span class="icon">🇮🇳</span> South India Roots</span>
-      <span class="pill"><span class="icon">🧠</span> 12+ Years in Tech</span>
+      <span class="pill"><span class="icon">🧠</span> <span id="experienceYears">13+</span> Years in Tech</span>
       <span class="pill"><span class="icon">✍️</span> 3500+ LinkedIn Followers</span>
     </div>
     <div class="hero-cta">
@@ -432,7 +432,7 @@
 
     <div class="about-stats fade-up" style="transition-delay:.15s">
       <div class="stat-card">
-        <div class="stat-number">~13<span style="font-size:1.6rem">yrs</span></div>
+        <div class="stat-number" id="statExperience">~13<span style="font-size:1.6rem">yrs</span></div>
         <div class="stat-label">Professional Experience</div>
       </div>
       <div class="stat-card">
@@ -493,7 +493,7 @@
       <div class="timeline-dot active"></div>
       <div class="timeline-content">
         <div class="timeline-place">United States 🇺🇸</div>
-        <div class="timeline-role">~3.5 Years &amp; Counting</div>
+        <div class="timeline-role"><span id="usaYears">~3.5 Years</span> &amp; Counting</div>
         <div class="timeline-desc">The land of scale and speed. Pushing frontiers in Tech and AI, while raising a family and writing the most exciting chapter yet.</div>
       </div>
     </div>
@@ -555,7 +555,7 @@
     <span>LinkedIn Followers &amp; Growing</span>
   </div>
   <div class="funfact-right">
-    I share technical articles, insights on AI, and career experiences that resonate with engineers and tech professionals across the globe. The conversations and community built through writing have been one of the most rewarding parts of my career.
+    I share technical articles, insights on AI, and career experiences that resonate with engineers and tech professionals across the globe. The conversations and community built through writing have been incredibly rewarding.
   </div>
 </div>
 
@@ -578,6 +578,54 @@
 </footer>
 
 <script>
+  // Function to calculate years of experience
+  function calculateExperience() {
+    const startYear = 2013;
+    const currentYear = new Date().getFullYear();
+    const yearsOfExp = currentYear - startYear;
+    return yearsOfExp;
+  }
+
+  // Function to calculate time in USA
+  function calculateUSAYears() {
+    const usaStartDate = new Date(2022, 7, 1); // August 1, 2022 (month is 0-indexed)
+    const currentDate = new Date();
+    
+    const diffTime = currentDate - usaStartDate;
+    const diffYears = diffTime / (1000 * 60 * 60 * 24 * 365.25);
+    
+    // Round to 1 decimal place
+    const rounded = Math.round(diffYears * 10) / 10;
+    return rounded.toFixed(1);
+  }
+
+  // Update experience years
+  function updateDynamicValues() {
+    const expYears = calculateExperience();
+    const usaYears = calculateUSAYears();
+    
+    // Update hero meta pill
+    const expElement = document.getElementById('experienceYears');
+    if (expElement) {
+      expElement.textContent = expYears + '+';
+    }
+    
+    // Update about stats card
+    const statElement = document.getElementById('statExperience');
+    if (statElement) {
+      statElement.innerHTML = `~${expYears}<span style="font-size:1.6rem">yrs</span>`;
+    }
+    
+    // Update timeline USA section
+    const usaElement = document.getElementById('usaYears');
+    if (usaElement) {
+      usaElement.textContent = `~${usaYears} Years`;
+    }
+  }
+
+  // Call on page load
+  updateDynamicValues();
+
   // Intersection observer for fade-up and timeline animations
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
